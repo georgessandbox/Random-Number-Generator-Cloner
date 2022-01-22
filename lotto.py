@@ -18,7 +18,7 @@ def get(mean=0, sd=1, low=0, upp=10):
 
 # Generate numbers that fall within the analysis to train the model on
 new_rows = []
-for i in range(1, 6000):
+for i in range(1, 12000):
     val1, val2, val3, val4,\
         val5, val6, val7 = random.randint(1, 33), random.randint(2, 37), random.randint(3, 42), random.randint(5, 45), \
         random.randint(8, 48), random.randint(17, 49), random.randint(18, 50)
@@ -35,7 +35,7 @@ for i in range(1, 6000):
 
 df = df.append(new_rows, ignore_index=True)
 df = df.sample(frac=1).reset_index(drop=True)  # shuffle
-print(df.shape)
+print("matrix size : " + str(df.shape) )
 
 """ 
 X_train, X_test, y_train, y_test = train_test_split(
@@ -64,17 +64,21 @@ while True:
     val7 = round(get(mean=43, sd=13, low=36, upp=50))
 
     # test with auto generated numbers or numbers of your own
-    #oneitem = [[val1, val2, val3, val4,  val5, val6, val7]]
-    oneitem = [[4, 6, 7, 10, 17, 27, 44]]
+    oneitem = [[val1, val2, val3, val4,  val5, val6, val7]]
+    #oneitem = [[4, 6, 7, 10, 17, 27, 44]]
 
     if len(set(oneitem[0])) == len(oneitem[0]):
 
         y = logistic.predict(oneitem)
 
         if y == 1:
-            print(oneitem)
+            print(str(oneitem) + "This one!")
             break
-    break
+        else:
+            print(str(oneitem) + " nope")
+            continue
+    else:
+            print(str(oneitem) + " nope")
 
 # one random value to guess on
     """ 
